@@ -5,17 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace RPS.cs
-    // Game manager to control player & Computer actions
+    // Game manager to handle player and score
 {
     class GameManager
     { 
         int current_bet = 0;
         int computer_wins = 0;
-        int computer_wins_in_a_row = 0;
         int player_wins = 0;
-        int player_wins_in_a_row;
 
-        private int resetBet()
+
+        public int ResetState()
         {
             return current_bet = 0;
         }
@@ -25,12 +24,21 @@ namespace RPS.cs
             return current_bet = bet;
         }
 
-        private int PayoutBet()
+        public int PayoutBet()
         {
             return current_bet * 2;
         }
 
-        private void HandleResult(Result result)
+        public bool ValidateBet(int bet)
+        {
+            if (bet <= 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void HandleResult(Result result)
         {
             if (result == Result.Win)
             {
@@ -41,22 +49,22 @@ namespace RPS.cs
             {
                 HandleCPUWin();
             }
-            
-            // Otherwise draw, reset bet state
+
         }
 
         private void HandlePlayerWin()
         {
             player_wins++;
-            player_wins_in_a_row++;
-            computer_wins_in_a_row = 0;
         }
 
         private void HandleCPUWin()
         {
             computer_wins++;
-            computer_wins_in_a_row++;
-            player_wins_in_a_row = 0;
+        }
+
+        public void Score()
+        {
+            Console.WriteLine("Player wins = {0} Computer Wins = {1}", player_wins, computer_wins);
         }
 
     }

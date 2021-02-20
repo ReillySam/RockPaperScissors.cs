@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPS.cs
 {
-    public enum Result
+    public enum Result : int
     {
         Tie = 0,
         Win = 1,

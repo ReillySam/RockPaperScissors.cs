@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPS.cs
 {
-    public enum Action
+    public enum Action : int
     {
         Rock = 0,
         Paper = 1,

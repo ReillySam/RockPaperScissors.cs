@@ -34,11 +34,12 @@ namespace RPS.cs
 
         public bool TryBet(int funds)
         {
-            if (balance < funds)
+            if (funds > balance)
                 return false;
             balance -= funds;
             return true;
-        }   
+        }
+
     }
 
 }

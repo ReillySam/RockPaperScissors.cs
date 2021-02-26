@@ -12,4 +12,5 @@ namespace RPS.cs
         Paper = 1,
         Scissors = 2
     }
+
 }

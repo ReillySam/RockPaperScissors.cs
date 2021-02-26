@@ -64,7 +64,14 @@ namespace RPS.cs
 
         public void Score()
         {
-            Console.WriteLine("Player wins = {0} Computer Wins = {1}", player_wins, computer_wins);
+            Console.WriteLine("Player wins = {0} Computer Wins = {1}", player_wins.ToString(), computer_wins.ToString());
+        }
+
+        public void WinMap()
+        {
+            Console.WriteLine("Rock BEATS Scissors");
+            Console.WriteLine("Scissors BEATS Paper");
+            Console.WriteLine("Paper BEATS Rock\n");
         }
 
     }

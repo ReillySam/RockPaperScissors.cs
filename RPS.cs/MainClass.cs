@@ -9,14 +9,17 @@ namespace RPS.cs
 
     class MainClass
     {
-
+        // Actions not functiong properly, default is getting assigned. Get methods not returning the assigned value
         private static int bet;
-        private static Action player_action;
+
         private static Result game_result;
-        private static Action computer_action;
+         
+        public static Action player_action;
+        public static Action computer_action;
 
         static void Main(string[] args)
         {
+
             Utils utils = new Utils();
             GameManager gameManager = new GameManager();
 
@@ -29,32 +32,10 @@ namespace RPS.cs
 
 
             Console.WriteLine("Sucessfully created player {0}!\n", player1.GetName());
-           
+
             while (true)
             {
-                // Take bet
                 gameManager.Score();
-                Console.WriteLine("\n\nYour balance is {0}\n\n", player1.GetBalance());
-                Console.WriteLine("\nPlease enter amount you would like to bet against the computer: ");
-                string bet_input = Console.ReadLine();
-
-                // Validate bet & remove funds
-                int.TryParse(bet_input, out bet);
-                if (!gameManager.ValidateBet(bet))
-                {
-                    Console.WriteLine("\nInvalid input for bet amount, it must be int value greater than 0. You have entered: {0}\n\n", bet.ToString());
-                    continue;
-                }
-
-                if (!player1.TryBet(bet))
-                {
-                    Console.WriteLine("\nYou don't have enough funds! Your balance is: {0}. Your bet amount is: {1}\n\n", player1.GetBalance().ToString(), bet.ToString());
-                    continue;
-                }
-
-                gameManager.AcceptBet(bet);
-                Console.WriteLine("\nYou have successfully placed a bet of {0}\nYour balance is {1}", bet.ToString(), player1.GetBalance().ToString());
-
 
                 //Take player action, make win map here
                 Console.WriteLine("\n\n::: Actions :::");
@@ -77,11 +58,36 @@ namespace RPS.cs
 
                 }
 
-                //Take CPU action 
-                utils.GetComputerAction();
-                Console.WriteLine("\nYou have played - {0}\nThe computer has played {1}\n", utils.ActionToString[player_action], computer_action);
+                // Take bet
+                Console.WriteLine("\n\nYour balance is {0}", player1.GetBalance());
+                Console.WriteLine("Please enter amount you would like to bet against the computer: ");
+                string bet_input = Console.ReadLine();
 
-                // Win actions map here
+                // Validate bet & remove funds
+                int.TryParse(bet_input, out bet);
+                if (!gameManager.ValidateBet(bet))
+                {
+                    Console.WriteLine("\nInvalid input for bet amount, it must be int value greater than 0. You have entered: {0}\n\n", bet.ToString());
+                    continue;
+                }
+
+                if (!player1.TryBet(bet))
+                {
+                    Console.WriteLine("\nYou don't have enough funds! Your balance is: {0}. Your bet amount is: {1}\n\n", player1.GetBalance().ToString(), bet.ToString());
+                    continue;
+                } 
+
+                gameManager.AcceptBet(bet);
+                Console.WriteLine("\nYou have successfully placed a bet of {0}\nYour balance is {1}", bet.ToString(), player1.GetBalance().ToString());
+
+
+                //Take CPU action 
+                utils.GetComputerAction(computer_action);
+                Console.WriteLine("Computer Action: {0}", computer_action.ToString());
+                Console.WriteLine("=====/////");
+                Console.WriteLine("\nYou have played - {0}\nThe computer has played {1}\n\n", player_action, computer_action);
+
+/*                gameManager.WinMap();
 
                 // Evaluate 
                 game_result = utils.EvaluateResult(player_action, computer_action);
@@ -112,7 +118,7 @@ namespace RPS.cs
 
                 }
 
-                gameManager.ResetState();
+                gameManager.ResetState();*/
 
 
             }

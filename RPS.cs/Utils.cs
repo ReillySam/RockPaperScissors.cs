@@ -8,6 +8,7 @@ namespace RPS.cs
 {
     public class Utils
     {
+
         public Dictionary<Action, Action> WinActions = new Dictionary<Action, Action>
         {
             {Action.Rock, Action.Scissors},
@@ -38,28 +39,29 @@ namespace RPS.cs
             if (InputToAction.ContainsKey(action))
             {
                 player_action = InputToAction[action];
-                Console.WriteLine(ActionToString[player_action]);
+                Console.WriteLine(ActionToString[player_action]); // This prints the correct action
                 return true;
             }
             return false;
         }
 
         // computer action
-        public void GetComputerAction()
+        public Action GetComputerAction(Action computer_action)
         {
             Random rand = new Random();
             int index = rand.Next(ActionToString.Count);
-            string computer_action = ActionToString.Values.ElementAt(index);
+            computer_action = (Action)index;
+            return computer_action;
         }
 
-        // Evaluate 
+        // Evaluate. Taking default values. Need to use string actions to assign Action actions for evaluation  
         public Result EvaluateResult(Action player_action, Action computer_action)
         {
             if (player_action == computer_action)
             {
                 return Result.Tie;
             }
-            else if (WinActions.TryGetValue(computer_action, out player_action))
+            else if (!WinActions.TryGetValue(computer_action, out player_action))
             {
                 return Result.Loss;
             }

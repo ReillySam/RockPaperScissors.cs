@@ -8,9 +8,10 @@ namespace RPS.cs
 {
     public enum Action : int
     {
-        Rock = 0,
-        Paper = 1,
-        Scissors = 2
+        Default = 0,
+        Rock = 1,
+        Paper = 2,
+        Scissors = 3
     }
 
 }

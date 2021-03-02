@@ -9,7 +9,7 @@ namespace RPS.cs
     public class Utils
     {
 
-        public Dictionary<Action, Action> WinActions = new Dictionary<Action, Action>
+        private Dictionary<Action, Action> WinActions = new Dictionary<Action, Action>
         {
             {Action.Rock, Action.Scissors},
             {Action.Paper, Action.Rock},
@@ -34,15 +34,17 @@ namespace RPS.cs
         };
 
         // Player action
-        public bool GetPlayerAction(string action, Action player_action)
+        public Action GetPlayerAction(string action, Action player_action)
         {
             if (InputToAction.ContainsKey(action))
             {
                 player_action = InputToAction[action];
-                Console.WriteLine(ActionToString[player_action]); // This prints the correct action
-                return true;
+/*                Console.WriteLine(ActionToString[player_action]); // This prints the correct action, but new value is not assigned/returned to action
+*/                Console.WriteLine("-----This is printing the value I want -- {0}", player_action);
+                return player_action;
             }
-            return false;
+
+            return 0;
         }
 
         // computer action
@@ -51,6 +53,7 @@ namespace RPS.cs
             Random rand = new Random();
             int index = rand.Next(ActionToString.Count);
             computer_action = (Action)index;
+            Console.WriteLine(computer_action + "1234");
             return computer_action;
         }
 

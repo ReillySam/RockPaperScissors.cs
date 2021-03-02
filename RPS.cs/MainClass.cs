@@ -12,12 +12,7 @@ namespace RPS.cs
         // Actions not functiong properly, default is getting assigned. Get methods not returning the assigned value
         private static int bet;
 
-        private static Result game_result;
-         
-        public static Action player_action;
-        public static Action computer_action;
-
-        static void Main(string[] args)
+        private static void Main(string[] args, Action player_action, Action computer_action, Result game_result)
         {
 
             Utils utils = new Utils();
@@ -42,21 +37,25 @@ namespace RPS.cs
                 Console.WriteLine("\n> r - Rock, \n> p - Paper \n> s - Scissors \n> q - Quit Game\n\nPlease enter an action");
                 string action = Console.ReadLine();
 
-                if (!utils.GetPlayerAction(action, player_action))
+                // bool method cannot return int.Action. Use try catch instead
+                try
                 {
+                    utils.GetPlayerAction(action, player_action);
+                    Console.WriteLine("=====/////");
+                } 
 
+                catch (Exception e)
+
+                {
                     if (action == "q")
                     {
                         Console.WriteLine("Quitting game... ");
                         break;
                     }
 
-                    else
-                    {
-                        Console.WriteLine("Invalid input try again... ");
-                    }
-
+                    Console.WriteLine("Invalid input of {0}, try again... ", action, e);
                 }
+
 
                 // Take bet
                 Console.WriteLine("\n\nYour balance is {0}", player1.GetBalance());
@@ -78,13 +77,11 @@ namespace RPS.cs
                 } 
 
                 gameManager.AcceptBet(bet);
-                Console.WriteLine("\nYou have successfully placed a bet of {0}\nYour balance is {1}", bet.ToString(), player1.GetBalance().ToString());
+                Console.WriteLine("\nYou have successfully placed a bet of {0}\nYour balance is NOW {1}", bet.ToString(), player1.GetBalance().ToString());
 
 
                 //Take CPU action 
                 utils.GetComputerAction(computer_action);
-                Console.WriteLine("Computer Action: {0}", computer_action.ToString());
-                Console.WriteLine("=====/////");
                 Console.WriteLine("\nYou have played - {0}\nThe computer has played {1}\n\n", player_action, computer_action);
 
 /*                gameManager.WinMap();

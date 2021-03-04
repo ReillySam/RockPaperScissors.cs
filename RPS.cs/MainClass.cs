@@ -9,7 +9,7 @@ namespace RPS.cs
 
     class MainClass
     {
-        // Actions not functiong properly, default is getting assigned. Get methods not returning the assigned value
+        
         private static int bet;
 
         private static void Main(string[] args, Action player_action, Action computer_action, Result game_result)
@@ -32,16 +32,14 @@ namespace RPS.cs
             {
                 gameManager.Score();
 
-                //Take player action, make win map here
+                //Take player action
                 Console.WriteLine("\n\n::: Actions :::");
                 Console.WriteLine("\n> r - Rock, \n> p - Paper \n> s - Scissors \n> q - Quit Game\n\nPlease enter an action");
                 string action = Console.ReadLine();
 
-                // bool method cannot return int.Action. Use try catch instead
                 try
                 {
                     utils.GetPlayerAction(action, player_action);
-                    Console.WriteLine("=====/////");
                 } 
 
                 catch (Exception e)
@@ -79,12 +77,11 @@ namespace RPS.cs
                 gameManager.AcceptBet(bet);
                 Console.WriteLine("\nYou have successfully placed a bet of {0}\nYour balance is NOW {1}", bet.ToString(), player1.GetBalance().ToString());
 
-
                 //Take CPU action 
                 utils.GetComputerAction(computer_action);
                 Console.WriteLine("\nYou have played - {0}\nThe computer has played {1}\n\n", player_action, computer_action);
 
-/*                gameManager.WinMap();
+                gameManager.WinMap();
 
                 // Evaluate 
                 game_result = utils.EvaluateResult(player_action, computer_action);
@@ -115,8 +112,7 @@ namespace RPS.cs
 
                 }
 
-                gameManager.ResetState();*/
-
+                gameManager.ResetState();
 
             }
 

@@ -8,7 +8,7 @@ namespace RPS.cs
 {
     public class Utils
     {
-
+        // Action maps
         private Dictionary<Action, Action> WinActions = new Dictionary<Action, Action>
         {
             {Action.Rock, Action.Scissors},
@@ -39,8 +39,8 @@ namespace RPS.cs
             if (InputToAction.ContainsKey(action))
             {
                 player_action = InputToAction[action];
-/*                Console.WriteLine(ActionToString[player_action]); // This prints the correct action, but new value is not assigned/returned to action
-*/                Console.WriteLine("-----This is printing the value I want -- {0}", player_action);
+                Console.WriteLine(ActionToString[player_action]); 
+                
                 return player_action;
             }
 
@@ -53,11 +53,13 @@ namespace RPS.cs
             Random rand = new Random();
             int index = rand.Next(ActionToString.Count);
             computer_action = (Action)index;
-            Console.WriteLine(computer_action + "1234");
+            
+            Console.WriteLine(computer_action + "-------");
+            
             return computer_action;
         }
-
-        // Evaluate. Taking default values. Need to use string actions to assign Action actions for evaluation  
+        
+        // Evaluation 
         public Result EvaluateResult(Action player_action, Action computer_action)
         {
             if (player_action == computer_action)

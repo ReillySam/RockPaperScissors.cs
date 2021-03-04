@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace RPS.cs
-    // Game manager to handle player and score
+    // Game manager to handle player features and game score
 {
     class GameManager
     { 
